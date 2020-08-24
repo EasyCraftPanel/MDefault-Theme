@@ -1,0 +1,47 @@
+{include:header var.title="控制台"}
+{init:server}
+<div class="mdui-card mdui-col-xs-12" style="padding-bottom: 50px;">
+    <div class="mdui-card-primary">
+        <div class="mdui-card-primary-title">{var.server.name}</div>
+        <div class="mdui-card-primary-subtitle{if:var.server.expired} mdui-text-color-red{endif}">到期时间:
+            {var.server.expiretime}</div>
+    </div>
+    <ul class="mdui-list mdui-col-md-3 mdui-col-xs-12">
+        <li class="mdui-list-item mdui-ripple" id="easycraft-toggle-status">
+            <i id="easycraft-server-status-icon"
+                class="mdui-list-item-icon mdui-icon material-icons">{if:var.server.running}pause{else}play_arrow{endif}</i>
+            <div id="easycraft-server-status-text" class="mdui-list-item-content">
+                {if:var.server.running}停止{else}启动{endif}</div>
+        </li>
+        <a class="mdui-list-item mdui-ripple" href="/page/server/{var.server.id}">
+            <i id="easycraft-server-status-icon" class="mdui-list-item-icon mdui-icon material-icons">dehaze</i>
+            <div id="easycraft-server-status-text" class="mdui-list-item-content">信息</div>
+        </a>
+        <a class="mdui-list-item mdui-ripple mdui-list-item-active" href="/page/console/{var.server.id}">
+            <i id="easycraft-server-status-icon" class="mdui-list-item-icon mdui-icon material-icons">dvr</i>
+            <div id="easycraft-server-status-text" class="mdui-list-item-content">控制台</div>
+        </a>
+    </ul>
+    <div class="mdui-col-offset-md-1 mdui-col-md-8 mdui-col-offset-md-1 mdui-col-xs-12">
+        <div class="mdui-typo-display-3">控制台</div>
+        <label class="mdui-checkbox">
+            <input type="checkbox" id="easycraft-console-follow-select" checked/>
+            <i class="mdui-checkbox-icon"></i>
+            跟随滚动
+          </label>
+        <div id="easycraft-server-console" class="mdui-color-black mdui-col-xs-12">
+        </div>
+        <div class="mdui-col-xs-12">
+            <div class="mdui-textfield mdui-col-xs-10">
+                <input id="easycraft-console-send-cmd" class="mdui-textfield-input" type="text" placeholder="在此输入指令..." />
+            </div>
+            <button id="easycraft-console-send-button" class="mdui-btn mdui-col-xs-1 mdui-col-offset-xs-1 mdui-color-theme-accent mdui-ripple">发送</button>
+        </div>
+    </div>
+
+</div>
+<script>
+    var run_status = {var.server.running};
+    var server_id = {var.server.id};
+</script>
+{include:footer}
