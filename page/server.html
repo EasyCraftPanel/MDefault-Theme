@@ -1,0 +1,79 @@
+{init:server}
+{init:cores}
+{include:header var.title=var.server.name}
+<div class="mdui-card mdui-col-xs-12" style="padding-bottom: 50px;">
+  <div class="mdui-card-primary">
+    <div class="mdui-card-primary-title">{var.server.name}</div>
+    <div class="mdui-card-primary-subtitle{if:var.server.expired} mdui-text-color-red{endif}">到期时间: {var.server.expiretime}</div>
+	
+	<ul class="mdui-list mdui-col-md-3 mdui-col-xs-12">
+		<li class="mdui-list-item mdui-ripple" id="easycraft-toggle-status">
+			<i id="easycraft-server-status-icon" class="mdui-list-item-icon mdui-icon material-icons">{if:var.server.running}pause{else}play_arrow{endif}</i>
+			<div id="easycraft-server-status-text" class="mdui-list-item-content">{if:var.server.running}停止{else}启动{endif}</div>
+		</li>  
+	</ul>
+	
+	<div class="mdui-col-md-8 mdui-col-offset-md-1 mdui-col-xs-12">
+		<p class="mdui-col-md-2 mdui-col-xs-12">服务器名称</p>
+		<div class="mdui-col-md-10 mdui-textfield">
+			<input class="mdui-textfield-input" value="{var.server.name}" type="text" {if:var.user.type<="2"}disabled{endif}/>
+		</div>
+		<p class="mdui-col-md-2 mdui-col-xs-12">最大玩家数</p>
+		<div class="mdui-col-md-10 mdui-textfield">
+			<input class="mdui-textfield-input" value="{var.server.maxplayer}" type="text" {if:var.user.type<="2"}disabled{endif}/>
+		</div>
+		<p class="mdui-col-md-2 mdui-col-xs-12">端口</p>
+		<div class="mdui-col-md-10 mdui-textfield">
+			<input class="mdui-textfield-input" value="{var.server.port}" type="text" {if:var.user.type<="2"}disabled{endif}/>
+		</div>
+		<p class="mdui-col-md-2 mdui-col-xs-12">内存</p>
+		<div class="mdui-col-md-10 mdui-textfield">
+			<input class="mdui-textfield-input" value="{var.server.ram}" type="text" {if:var.user.type<="2"}disabled{endif}/>
+		</div>
+		<p class="mdui-col-md-2 mdui-col-xs-12">到期时间</p>
+		<div class="mdui-col-md-10 mdui-textfield">
+			<input class="mdui-textfield-input" value="{var.server.expiretime}" type="text" {if:var.user.type<="2"}disabled{endif}/>
+		</div>
+		<p class="mdui-col-md-2 mdui-col-xs-12">核心</p>
+		<select class="mdui-col-md-10 mdui-select" mdui-select>
+			{foreach:var.cores}
+			<option value="{var.for.core.id}"{if:var.for.core.id=var.server.core} selected = "selected"{endif}>{var.for.core.name}</option>
+			{break}
+		</select>
+		<br />
+		<button class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple" style="margin-top: 30px;">保存</button>
+	</div>
+  </div>
+</div>
+
+<script>
+var run_status = {var.server.running};
+var $ = mdui.$;
+// 服务器启动状态更改
+$('#easycraft-toggle-status').on('click', function (e) {
+	$.ajax({
+		method: 'POST',
+		url: run_status?'/api/stop_server':'/api/start_server',
+		data: {
+			sid: {var.server.id}
+		},
+		success: function (data) {
+			data=JSON.parse(data);
+			if (data.code==9000){
+				run_status=!run_status;
+				if (run_status){
+					$('#easycraft-server-status-icon').html('pause');
+					$('#easycraft-server-status-text').html('停止');
+				}else{
+					$('#easycraft-server-status-icon').html('play_arrow');
+					$('#easycraft-server-status-text').html('启动');
+				}
+			}
+			mdui.snackbar({
+                message: data.message,
+                position: 'right-top'
+            });
+		}
+	});
+});
+</script>

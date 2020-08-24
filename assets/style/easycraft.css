@@ -1,0 +1,54 @@
+.easycraft-login-card{
+	margin-top: 10%;
+}
+
+#easycraft-login-form{
+	padding: 0 15px 62px;
+}
+
+#easycraft-login-button{
+	margin-top: 30px;
+}
+
+body{
+	height: 100%;
+}
+
+.easycraft-footer{
+    background: #888888;
+    color: #FFFFFF;
+	height: 35px;
+	line-height: 35px;
+    text-align: center;
+	position: absolute;
+bottom: 0;
+width: 100%;
+clear:both;
+}
+
+html,body {
+margin: 0;
+padding:0;
+height: 100%;
+}
+
+body {
+min-height:100%;
+height: auto !important;
+height: 100%; /*IE6不识别min-height*/
+position: relative;
+}
+
+.mdui-container {
+margin: 0 auto;
+padding-bottom: 35px;/*等于footer的高度*/
+}
+
+.easycraft-servers-list-item{
+	margin-top: 15px;
+}
+
+.easycraft-servers-list{
+	padding-top: 15px;
+	padding-bottom: 30px;
+}

@@ -1,0 +1,28 @@
+{include:header var.title="登录"}
+<style>
+body{
+	background-image: url('/assets/img/welcome.png');
+	background-blend-mode: hard-light;
+}
+</style>
+<div class="mdui-card mdui-col-lg-5 mdui-col-offset-lg-8 easycraft-login-card">
+	  <div class="mdui-card-primary">
+    <div class="mdui-card-primary-title">登录</div>
+    <div class="mdui-card-primary-subtitle">登录到 EasyCraft</div>
+  </div>
+  <form id="easycraft-login-form" onsubmit="return false;">
+	<div class="mdui-textfield mdui-textfield-floating-label">
+  <label class="mdui-textfield-label">用户名</label>
+  <input class="mdui-textfield-input" type="text" name="username"/>
+</div>
+
+	<div class="mdui-textfield mdui-textfield-floating-label">
+  <label class="mdui-textfield-label">密码</label>
+  <input class="mdui-textfield-input" type="password" name="password"/>
+</div>
+<button class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple" id="easycraft-login-button">登录</button>
+
+  </form>
+</div>
+
+{include:footer}
