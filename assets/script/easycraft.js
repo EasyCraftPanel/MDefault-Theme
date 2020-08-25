@@ -144,3 +144,38 @@ function sendcmd() {
 
 $('#easycraft-console-send-button').on('click', sendcmd);
 $('#easycraft-console-send-cmd').on('keypress',function(e){if(e.keyCode==13) sendcmd();})
+$('#easycraft-server-console').on('wheel',function(e){console.log(e);$('#easycraft-console-follow-select').prop('checked',false)})
+	
+var log_clean_server = false;
+$('#easycraft-swap-console').on('click',function (){
+	if (!log_clean_server){
+		$('.easycraft-log').remove();
+		$('#easycraft-swap-console').text("彻底清除日志");
+		log_clean_server=true;
+		setTimeout(function(){
+			$('#easycraft-swap-console').text("清空日志");
+			log_clean_server=false;
+		},3000);
+	}else{
+		$.ajax({
+        method: 'POST',
+        url: '/api/clear_log',
+        data: {
+            sid: server_id
+        },
+        success: function (data) {
+            data = JSON.parse(data);
+            if (data.code == 9000) {
+                $('.easycraft-log').remove();
+				$('#easycraft-swap-console').text("清空日志");
+				log_clean_server=false;
+            }
+            mdui.snackbar({
+                message: data.message,
+                position: 'right-top'
+            });
+        }
+    })
+	}
+
+});
