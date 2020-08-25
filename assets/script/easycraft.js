@@ -96,6 +96,14 @@ function refreshlog() {
                         $('#easycraft-server-console').append("<p class=\"easycraft-log-latest easycraft-log\"><strong>" + log.message + "</strong></p>")
                     }
                 });
+				run_status=data.data.starting;
+				if (run_status) {
+                    $('#easycraft-server-status-icon').html('pause');
+                    $('#easycraft-server-status-text').html('停止');
+                } else {
+                    $('#easycraft-server-status-icon').html('play_arrow');
+                    $('#easycraft-server-status-text').html('启动');
+                }
             } else {
                 $('#easycraft-server-console').append("<p class=\"easycraft-log-latest easycraft-log-get-error mdui-text-color-red\"><strong>读取日志失败: " + data.message + "</strong></p>")
             }
