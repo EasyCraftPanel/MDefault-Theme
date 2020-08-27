@@ -229,6 +229,6 @@ function refreshserver(){
     })
 }
 
-if ($('#easycraft-toggle-status').length==1){
+if ($('#easycraft-toggle-status').length==1 && $('#easycraft-server-console').length == 0){
 	setInterval(refreshserver,3000);
 }
