@@ -6,22 +6,7 @@
         <div class="mdui-card-primary-subtitle{if:var.server.expired} mdui-text-color-red{endif}">到期时间:
             {var.server.expiretime}</div>
     </div>
-    <ul class="mdui-list mdui-col-md-3 mdui-col-xs-12">
-        <li class="mdui-list-item mdui-ripple" id="easycraft-toggle-status">
-            <i id="easycraft-server-status-icon"
-                class="mdui-list-item-icon mdui-icon material-icons">{if:var.server.running}pause{else}play_arrow{endif}</i>
-            <div id="easycraft-server-status-text" class="mdui-list-item-content">
-                {if:var.server.running}停止{else}启动{endif}</div>
-        </li>
-        <a class="mdui-list-item mdui-ripple" href="/page/server/{var.server.id}">
-            <i id="easycraft-server-status-icon" class="mdui-list-item-icon mdui-icon material-icons">info</i>
-            <div id="easycraft-server-status-text" class="mdui-list-item-content">信息</div>
-        </a>
-        <a class="mdui-list-item mdui-ripple mdui-list-item-active" href="/page/console/{var.server.id}">
-            <i id="easycraft-server-status-icon" class="mdui-list-item-icon mdui-icon material-icons">dvr</i>
-            <div id="easycraft-server-status-text" class="mdui-list-item-content">控制台</div>
-        </a>
-    </ul>
+    {include:leftbar var.running=var.server.running,var.select="console"}
     <div class="mdui-col-offset-md-1 mdui-col-md-8 mdui-col-offset-md-1 mdui-col-xs-12">
         <div class="mdui-typo-display-3">控制台</div>
         <label class="mdui-checkbox">
@@ -33,7 +18,7 @@
         <div id="easycraft-server-console" class="mdui-color-black mdui-col-xs-12">
         </div>
         <div class="mdui-textfield mdui-col-xs-12">
-			<i class="mdui-icon material-icons">chat</i>
+			<i class="mdui-icon material-icons">settings_ethernet</i>
             <input id="easycraft-console-send-cmd" class="mdui-textfield-input" type="text" placeholder="在此输入指令..." />
         </div>
     </div>

@@ -2,6 +2,10 @@
 	margin-top: 10%;
 }
 
+#main-drawer{
+	background-color: rgba(121,121,121,0.5);
+}
+
 #easycraft-login-form{
 	padding: 0 15px 62px;
 }

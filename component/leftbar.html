@@ -1,0 +1,19 @@
+	
+	<ul class="mdui-list mdui-col-md-3 mdui-col-xs-12">
+		<li class="mdui-list-item mdui-ripple" id="easycraft-toggle-status">
+			<i id="easycraft-server-status-icon" class="mdui-list-item-icon mdui-icon material-icons">{if:var.running}pause{else}play_arrow{endif}</i>
+			<div id="easycraft-server-status-text" class="mdui-list-item-content">{if:var.running}停止{else}启动{endif}</div>
+		</li>
+		<a class="mdui-list-item mdui-ripple{if:var.select="info"} mdui-list-item-active{endif}" href="/page/server/{var.server.id}">
+			<i id="easycraft-server-status-icon" class="mdui-list-item-icon mdui-icon material-icons">info</i>
+			<div id="easycraft-server-status-text" class="mdui-list-item-content">信息</div>
+		</a>
+		<a class="mdui-list-item mdui-ripple{if:var.select="console"} mdui-list-item-active{endif}" href="/page/console/{var.server.id}">
+			<i id="easycraft-server-status-icon" class="mdui-list-item-icon mdui-icon material-icons">dvr</i>
+			<div id="easycraft-server-status-text" class="mdui-list-item-content">控制台</div>
+		</a>
+		<a class="mdui-list-item mdui-ripple{if:var.select="ftp"} mdui-list-item-active{endif}" href="/page/ftp/{var.server.id}">
+			<i id="easycraft-server-status-icon" class="mdui-list-item-icon mdui-icon material-icons">folder</i>
+			<div id="easycraft-server-status-text" class="mdui-list-item-content">FTP文件管理</div>
+		</a>
+	</ul>

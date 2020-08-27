@@ -15,10 +15,10 @@
   <title>{var.title} - EasyCraft</title>
 </head>
 
-<body class="mdui-appbar-with-toolbar mdui-drawer-body-left mdui-theme-layout-auto mdui-theme-primary-indigo mdui-theme-accent-light-green">
+<body class="mdui-appbar-with-toolbar mdui-drawer-body-left mdui-theme-layout-dark mdui-theme-primary-indigo mdui-theme-accent-light-green">
   <header class="mdui-appbar mdui-appbar-fixed">
     <div class="mdui-toolbar mdui-color-theme">
-    <span class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#main-drawer', swipe: true}"><i
+    <span class="mdui-btn mdui-btn-icon"{if:var.user.login} mdui-drawer="{target: '#main-drawer', swipe: true}"{endif}><i
         class="mdui-icon material-icons">menu</i></span>
     <span class="mdui-typo-headline mdui-hidden-xs">EasyCraft</span>
     <a class="mdui-typo-title">{var.title}</a>
@@ -28,27 +28,24 @@
         class="mdui-img-circle mdui-icon" src="http://q1.qlogo.cn/g?b=qq&nk={var.user.qq}&s=640" />{endif}</button>
       </div>
   </header>
+  		 {if:var.user.login}
   <div class="mdui-drawer" id="main-drawer">
         <div class="mdui-list" mdui-collapse="{accordion: true}">
+
           <a class="mdui-list-item mdui-ripple" href="/page/index">
             <i class="mdui-list-item-icon mdui-icon material-icons">dashboard</i>
             <div class="mdui-list-item-content">仪表盘</div>
           </a>
           <li class="mdui-divider"></li>
-          {if:var.user.login}
           <a class="mdui-list-item mdui-ripple" href="/page/servers">
             <i class="mdui-list-item-icon mdui-icon material-icons">storage</i>
             <div class="mdui-list-item-content">服务器</div>
           </a>          
-          {else}
-          <a class="mdui-list-item mdui-ripple" href="/page/login">
-            <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
-            <div class="mdui-list-item-content">登录</div>
-          </a>     
-          {endif}
+
         </div>    
         <div class="copyright">
           <p>Powered by &copy; EasyCraft</p><p>Theme MDefult by Kengwang</p>
         </div>    
   </div>
+            {endif}
   <div class="mdui-container">

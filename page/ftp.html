@@ -1,0 +1,37 @@
+{include:header var.title="FTP文件管理"}
+{init:server}
+<div class="mdui-card mdui-col-xs-12" style="padding-bottom: 50px;">
+    <div class="mdui-card-primary">
+        <div class="mdui-card-primary-title">{var.server.name}</div>
+        <div class="mdui-card-primary-subtitle{if:var.server.expired} mdui-text-color-red{endif}">到期时间:
+            {var.server.expiretime}</div>
+    </div>
+    {include:leftbar var.running=var.server.running,var.select="ftp"}
+    <div class="mdui-col-offset-md-1 mdui-col-md-8 mdui-col-offset-md-1 mdui-col-xs-12">
+        <div class="mdui-typo-display-3">FTP文件管理</div>
+		<p class="mdui-col-md-2 mdui-col-xs-12">FTP地址</p>
+		<div class="mdui-col-md-10 mdui-textfield">
+			<input class="mdui-textfield-input" value="{var.easycraft.ftpaddr}" type="text" />
+		</div>
+		<p class="mdui-col-md-2 mdui-col-xs-12">用户名</p>
+		<div class="mdui-col-md-10 mdui-textfield">
+			<input class="mdui-textfield-input" value="{var.user.username}.{var.server.id}" type="text" />
+		</div>
+		<p class="mdui-col-md-2 mdui-col-xs-12">密码</p>
+		<div class="mdui-col-md-10 mdui-textfield">
+			<input class="mdui-textfield-input" value="您的面板密码" type="text" disabled />
+		</div>
+		<p class="mdui-col-md-2 mdui-col-xs-12">FTP模式</p>
+		<div class="mdui-col-md-10 mdui-textfield">
+			<input class="mdui-textfield-input" value="被动模式 (Passive Mode)" type="text" disabled />
+		</div>
+		<p class="mdui-col-md-2 mdui-col-xs-12">FTP编码</p>
+		<div class="mdui-col-md-10 mdui-textfield">
+			<input class="mdui-textfield-input" value="UTF-8" type="text" disabled />
+		</div>
+		<p class="mdui-center mdui-col-xs-12">不建议使用FTP编辑/创建中文文件名的文件/文件夹, 在某些情况下回出现无法挽回的问题</p>
+		<p class="mdui-center mdui-col-xs-12">Xftp 对于中文文件名会出现问题,FileZilla以及ES文件浏览器已经通过测试</p>
+    </div>
+
+</div>
+{include:footer}

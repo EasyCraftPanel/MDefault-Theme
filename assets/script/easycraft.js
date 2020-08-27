@@ -187,3 +187,48 @@ $('#easycraft-swap-console').on('click',function (){
 	}
 
 });
+
+
+function refreshserver(){
+	$.ajax({
+        method: 'POST',
+        url: '/api/server',
+        data: {
+            sid: server_id
+        },
+		timeout: 5000,
+        success: function (data) {
+            data = JSON.parse(data);
+			$('.easycraft-server-info-load-error').remove();
+            if (data.code == 9000) {
+				/*
+				$('input[name=name]').val(data.data.name);
+				$('input[name=maxplayer]').val(data.data.maxplayer);
+				$('input[name=port]').val(data.data.port);
+				$('input[name=ram]').val(data.data.ram);
+				$('input[name=expiretime]').val(data.data.expiretime);
+				//核心我不管了233
+				*/
+				run_status=data.data.running;
+				if (run_status) {
+                    $('#easycraft-server-status-icon').html('pause');
+                    $('#easycraft-server-status-text').html('停止');
+                } else {
+                    $('#easycraft-server-status-icon').html('play_arrow');
+                    $('#easycraft-server-status-text').html('启动');
+                }
+            }else{
+				$('.easycraft-server-title').after('<div class="mdui-typo mdui-text-color-red easycraft-server-info-load-error">服务器信息加载失败: '+data.message+'</div>');
+				
+			}
+        },
+		error:function(xhr,e){
+			$('.easycraft-server-info-load-error').remove();
+			$('.easycraft-server-title').after('<div class="mdui-typo mdui-text-color-red easycraft-server-info-load-error">服务器信息加载失败: '+e+'</div>');
+		}
+    })
+}
+
+if ($('#easycraft-toggle-status').length==1){
+	setInterval(refreshserver,3000);
+}
