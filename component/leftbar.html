@@ -1,5 +1,6 @@
 	
 	<ul class="mdui-list mdui-col-md-3 mdui-col-xs-12">
+		{if:!var.select="add"}
 		<li class="mdui-list-item mdui-ripple" id="easycraft-toggle-status">
 			<i id="easycraft-server-status-icon" class="mdui-list-item-icon mdui-icon material-icons">{if:var.running}pause{else}play_arrow{endif}</i>
 			<div id="easycraft-server-status-text" class="mdui-list-item-content">{if:var.running}停止{else}启动{endif}</div>
@@ -16,4 +17,10 @@
 			<i id="easycraft-server-status-icon" class="mdui-list-item-icon mdui-icon material-icons">folder</i>
 			<div id="easycraft-server-status-text" class="mdui-list-item-content">FTP文件管理</div>
 		</a>
+		{else}
+		<a class="mdui-list-item mdui-ripple" href="/page/servers">
+			<i id="easycraft-server-status-icon" class="mdui-list-item-icon mdui-icon material-icons">arrow_back</i>
+			<div id="easycraft-server-status-text" class="mdui-list-item-content">返回</div>
+		</a>
+		{endif}
 	</ul>

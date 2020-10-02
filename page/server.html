@@ -4,7 +4,7 @@
 <div class="mdui-card mdui-col-xs-12" style="padding-bottom: 50px;">
   <div class="mdui-card-primary">
     <div class="mdui-card-primary-title">{var.server.name}</div>
-	<div class="mdui-card-primary-subtitle{if:var.server.expired} mdui-text-color-red{endif}">到期时间: {var.server.expiretime}</div>
+	<div class="mdui-card-primary-subtitle{if:var.server.expired} mdui-text-color-red">已过期 到期时间: {var.server.expiretime}{else}">{endif}{if:var.server.running}运行中{else}已停止{endif}</div>
   </div>
 	
 	{include:leftbar var.running=var.server.running,var.select="info"}
@@ -29,7 +29,7 @@
 		</div>
 		<p class="mdui-col-md-2 mdui-col-xs-12">到期时间</p>
 		<div class="mdui-col-md-10 mdui-textfield">
-			<input class="mdui-textfield-input" value="{var.server.expiretime}" name="expiretime" type="text" {if:var.user.type<="2"}disabled{endif}/>
+			<input class="mdui-textfield-input" value="{var.server.expiretime}" name="expiretime" type="date" {if:var.user.type<="2"}disabled{endif}/>
 		</div>
 		<p class="mdui-col-md-2 mdui-col-xs-12">核心</p>
 		<select class="mdui-col-md-10 mdui-select" name="core" mdui-select>

@@ -31,9 +31,18 @@
  <div class="mdui-card-primary">
     <div class="mdui-card-primary-title"><i class="mdui-icon material-icons">notifications</i>    公告</div>
 	</div>
-	 <div class="mdui-card-content">
-	 这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告,这是公告
-	 </div>
+	{if:var.user.type>="4"}
+		<div class="mdui-card-menu" mdui-tooltip="{content: '保存'}">
+	      <button id="easycraft-edit-announcement" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-text-color-white"><i class="mdui-icon material-icons">edit</i></button>
+		  </div>
+		  <div class="mdui-textfield">
+  <textarea class="mdui-textfield-input" id="easycraft-announcement" placeholder="请输入公告">{var.easycraft.announcement}</textarea>
+</div>
+		  {else}
+		  	 <div class="mdui-card-content">
+	 {var.easycraft.announcement}
+			</div>
+		  {endif}
 </div>
 </div>
 {include:footer}
