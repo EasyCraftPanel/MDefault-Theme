@@ -1,3 +1,4 @@
+.easycraft-register-card,
 .easycraft-login-card{
 	margin-top: 10%;
 }
@@ -6,10 +7,12 @@
 	background-color: rgba(121,121,121,0.5);
 }
 
+#easycraft-register-form,
 #easycraft-login-form{
 	padding: 0 15px 62px;
 }
 
+#easycraft-register-button,
 #easycraft-login-button{
 	margin-top: 30px;
 }
@@ -54,4 +57,12 @@ padding-bottom: 35px;/*等于footer的高度*/
 .easycraft-servers-list{
 	padding-top: 15px;
 	padding-bottom: 30px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
 }

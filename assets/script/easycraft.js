@@ -8,19 +8,35 @@ $("#easycraft-login-button").on('click', function () {
         success: function (data) {
             data = JSON.parse(data);
             if (data.code == 9000) {
-                mdui.snackbar({
-                    message: '登录成功',
-                    position: 'right-top'
-                });
                 setTimeout(function () {
                     location = "/page/index";
                 }, 3000);
-            } else {
-                mdui.snackbar({
-                    message: data.message,
-                    position: 'right-top'
-                });
             }
+            mdui.snackbar({
+                message: data.message,
+                position: 'right-top'
+            });
+        }
+    })
+});
+
+//用户登录
+$("#easycraft-register-button").on('click', function () {
+    $.ajax({
+        url: '/api/register',
+        method: 'POST',
+        data: $("#easycraft-register-form").serialize(),
+        success: function (data) {
+            data = JSON.parse(data);
+            if (data.code == 9000) {
+                setTimeout(function () {
+                    location = "/page/index";
+                }, 3000);
+            }
+            mdui.snackbar({
+                message: data.message,
+                position: 'right-top'
+            });
         }
     })
 });
@@ -62,7 +78,9 @@ $('#easycraft-server-info-save').on('click', function () {
         success: function (data) {
             data = JSON.parse(data);
             if (data.code == 9000) {
-                setTimeout(function () { location.reload(); }, 3000);
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
             }
             mdui.snackbar({
                 message: data.message,
@@ -151,8 +169,13 @@ function sendcmd() {
 }
 
 $('#easycraft-console-send-button').on('click', sendcmd);
-$('#easycraft-console-send-cmd').on('keypress', function (e) { if (e.keyCode == 13) sendcmd(); })
-$('#easycraft-server-console').on('wheel', function (e) { console.log(e); $('#easycraft-console-follow-select').prop('checked', false) })
+$('#easycraft-console-send-cmd').on('keypress', function (e) {
+    if (e.keyCode == 13) sendcmd();
+})
+$('#easycraft-server-console').on('wheel', function (e) {
+    console.log(e);
+    $('#easycraft-console-follow-select').prop('checked', false)
+})
 
 var log_clean_server = false;
 $('#easycraft-swap-console').on('click', function () {
@@ -201,14 +224,14 @@ function refreshserver() {
             data = JSON.parse(data);
             $('.easycraft-server-info-load-error').remove();
             if (data.code == 9000) {
-				/*
-				$('input[name=name]').val(data.data.name);
-				$('input[name=maxplayer]').val(data.data.maxplayer);
-				$('input[name=port]').val(data.data.port);
-				$('input[name=ram]').val(data.data.ram);
-				$('input[name=expiretime]').val(data.data.expiretime);
-				//核心我不管了233
-				*/
+                /*
+                $('input[name=name]').val(data.data.name);
+                $('input[name=maxplayer]').val(data.data.maxplayer);
+                $('input[name=port]').val(data.data.port);
+                $('input[name=ram]').val(data.data.ram);
+                $('input[name=expiretime]').val(data.data.expiretime);
+                //核心我不管了233
+                */
                 run_status = data.data.running;
                 if (run_status) {
                     $('#easycraft-server-status-icon').html('pause');
@@ -264,7 +287,9 @@ $('#easycraft-server-create').on('click', function () {
         success: function (data) {
             data = JSON.parse(data);
             if (data.code == 9000) {
-                setTimeout(function () { location.reload(); }, 3000);
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
             }
             mdui.snackbar({
                 message: data.message,

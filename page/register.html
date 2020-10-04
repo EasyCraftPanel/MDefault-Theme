@@ -1,0 +1,30 @@
+{include:header var.title="注册"}
+<div class="mdui-card mdui-col-lg-5 mdui-col-offset-lg-8 easycraft-register-card">
+    <div class="mdui-card-primary">
+        <div class="mdui-card-primary-title">注册<a href="/page/login" mdui-tooltip="{content: '登录'}" class="mdui-btn mdui-btn-icon mdui-float-right"><i class="mdui-icon material-icons">account_circle</i></a></div>
+        <div class="mdui-card-primary-subtitle">注册 EasyCraft</div>
+    </div>
+    <form id="easycraft-register-form" onsubmit="return false;">
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">用户名</label>
+            <input class="mdui-textfield-input" type="text" name="username"/>
+        </div>
+
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">密码</label>
+            <input class="mdui-textfield-input" type="password" name="password"/>
+        </div>
+
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">邮箱</label>
+            <input class="mdui-textfield-input" type="email" name="email"/>
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">QQ号</label>
+            <input class="mdui-textfield-input" type="number" name="qq"/>
+        </div>
+        <button class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple" id="easycraft-register-button">注册</button>
+
+    </form>
+</div>
+{include:footer}

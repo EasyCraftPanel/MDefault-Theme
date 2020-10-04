@@ -23,10 +23,25 @@
     <span class="mdui-typo-headline mdui-hidden-xs">EasyCraft</span>
     <a class="mdui-typo-title">{var.title}</a>
     <div class="mdui-toolbar-spacer"></div>
-    <button{if:!var.user.login} mdui-tooltip="{content: '登录'}" {endif} class="mdui-btn mdui-btn-icon">
+    <button{if:!var.user.login} mdui-tooltip="{content: '登录'}" {endif} mdui-menu="{target: '#easycraft-selfuser-menu'}" class="mdui-btn mdui-btn-icon">
       {if:!var.user.login}<i class="mdui-icon material-icons">account_circle</i>{else}<img
-        class="mdui-img-circle mdui-icon" src="http://q1.qlogo.cn/g?b=qq&nk={var.user.qq}&s=640" />{endif}</button>
-      </div>
+        class="mdui-img-circle mdui-icon" src="{var.user.avatar}" />{endif}</button>
+    <ul class="mdui-menu" id="easycraft-selfuser-menu">
+	{if:!var.user.login}
+		<li class="mdui-menu-item">
+			<a href="/page/login" class="mdui-ripple">登录</a>
+		</li>
+		<li class="mdui-menu-item">
+			<a href="/page/register" class="mdui-ripple">注册</a>
+		</li>
+	{else}
+		<li class="mdui-menu-item">
+			<a href="/page/logout" class="mdui-ripple">退出登录</a>
+		</li>
+	{endif}
+	</ul>
+	</div>
+	
   </header>
   		 {if:var.user.login}
   <div class="mdui-drawer" id="main-drawer">
