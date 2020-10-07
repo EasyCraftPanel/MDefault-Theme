@@ -1,0 +1,149 @@
+@charset "utf-8";
+/* CSS Document */
+
+.data-keyword {
+	-webkit-tap-highlight-color: transparent;
+	height: 120px;
+	text-align: center;
+	cursor: pointer;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	min-width: 108px;
+}
+.data-keyword:hover,
+.data-keyword:focus {
+	background: #f0f0f0;
+}
+.data-keyword .mdui-icon {
+	height: 48px;
+	width: 48px;
+	font-size: 48px;
+	margin-top: 22px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	color: rgba(0, 0, 0, 0.54);
+}
+.data-keyword .data-caption {
+	color: #757575;
+	font-size: 12px;
+	margin: 16px auto 0 auto;
+	width: 85%;
+	z-index: 1;
+	word-break: break-all;
+}
+
+/* 深色主题 */
+
+.mdui-theme-layout-dark .data-keyword .mdui-icon {
+	color: rgba(255, 255, 255, 1);
+}
+.mdui-theme-layout-dark .data-keyword:hover,
+.mdui-theme-layout-dark .data-keyword:focus {
+	background: #424242;
+}
+.mdui-theme-layout-dark .data-keyword .data-caption {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 840px) {
+	.data-keyword {
+		min-width: 102px;
+	}
+	.data-keyword .mdui-icon {
+		width: 42px;
+		height: 42px;
+		font-size: 42px;
+	}
+}
+@media (max-width: 560px) {
+	.data-keyword {
+		min-width: 96px;
+	}
+	.data-keyword .mdui-icon {
+		width: 36px;
+		height: 36px;
+		font-size: 36px;
+	}
+}
+
+.js-data-keyword-copy {
+	cursor: pointer;
+}
+
+
+.kdui-drawer-footer{
+	width: 100%;
+	padding: 16px;
+
+	bottom: 0px;
+	position: absolute;
+	box-sizing: border-box;
+}
+
+.kdui-drawer-note{
+	width: 100%;
+	padding: 16px;
+	margin-bottom: 24px;
+	box-sizing: border-box;
+}
+
+.kdui-note-btn{
+	border: 1px solid #b2ff59;
+}
+.kdui-note-btn:hover{
+	background: #b2ff59 !important;
+	color: rgba(0,0,0,.87);
+}
+
+.kdui-server-input{
+	padding: 8px;
+	margin: 16px 0;
+	border-radius: 8px;
+	background: rgba(255,255,255,.05);
+}
+
+.kdui-server-input input{
+	padding: 0;
+	border: none;
+	color: #fff;
+	outline: none;
+	height: 36px;
+	font-size: 1.1em;
+	background: none;
+	width: calc(100% - 48px);
+}
+
+.kdui-server-add{
+	height: 28px;
+	line-height: 28px;
+	margin-top: 8px;
+	padding: 8px;
+	border-radius: 3px;
+	background: rgba(255,255,255,.2);
+}
+
+.kdui-server-cmd{
+	height: 420px;
+	border-radius: 8px;
+	background: rgba(0,0,0,.4);
+	overflow: hidden;
+	font-size: 0.8em;
+}
+
+.kdui-server-cmd div{
+	height: 420px;
+	padding: 8px 16px;
+	overflow-y: scroll;
+	box-sizing: border-box;
+}
+
+.kdui-server-cmd p{
+	margin: 4px 0;
+}
+
+.kdui-server-cmd p:last-child{
+	margin-bottom: 12px;
+}

@@ -173,7 +173,6 @@ $('#easycraft-console-send-cmd').on('keypress', function (e) {
     if (e.keyCode == 13) sendcmd();
 })
 $('#easycraft-server-console').on('wheel', function (e) {
-    console.log(e);
     $('#easycraft-console-follow-select').prop('checked', false)
 })
 
@@ -298,3 +297,66 @@ $('#easycraft-server-create').on('click', function () {
         }
     })
 });
+
+if (typeof(use_search) != "undefined"){
+	var clipboard;
+	var $$=mdui.$;
+	$$(function () {
+
+		var $data_search = $$('#data-search');
+		var data_wraps = [];
+		$$('.data-keyword-wrap').each(function (i, data) {
+			var $wrap = $$(data);
+			var data_name = $wrap.data('data-name');
+			var data_keyword = $wrap.data('data-keyword');
+			data_wraps.push({
+				$wrap: $wrap,
+				data_name: data_name,
+				data_keyword: data_keyword
+			});
+		});
+
+		// 自动聚焦到搜索框
+		$data_search.get(0).focus();
+
+		// 自动搜索
+		$data_search.on('input', $$.throttle(function () {
+			var value = $$(this).val();
+
+			$$.each(data_wraps, function (i, obj) {
+				var $wrap = obj.$wrap;
+				var data_name = obj.data_name;
+				var data_keyword = obj.data_keyword;
+
+				// 搜索词用空格分隔表示并且
+				var values = value.toLowerCase().split(' ');
+
+				var data_name_find = true;
+				var data_keyword_find = true;
+
+				$$.each(values, function (i, value) {
+					if (data_name.indexOf(value) === -1) {
+						data_name_find = false;
+					}
+					if (data_keyword.indexOf(value) === -1) {
+						data_keyword_find = false;
+					}
+				});
+				if (data_name_find || data_keyword_find) {
+					$wrap.show();
+				} else {
+					$wrap.hide();
+				}
+			});
+		}, 200));
+		
+		// 点击图标弹出对话框
+		$$(document).on('click', '.data-keyword-wrap', function () {
+			var $this = $$(this);
+			var datakeyword = $this.data('data-keyword');
+			var dataName = $this.data('data-name');
+		});
+
+
+	});
+}

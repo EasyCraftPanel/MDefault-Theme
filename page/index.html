@@ -1,48 +1,92 @@
-{include:header var.title="主页"}
+{include:header var.title="服务器管理"}
 {init:servers}
-<div style="margin-top:15px">
-<div class="mdui-card mdui-col-md-5 mdui-col-sm-12 mdui-hoverable" style="padding-bottom: 15px;">
-
- <div class="mdui-card-primary">
-
-    <div class="mdui-card-primary-title"> <i class="mdui-icon material-icons">storage</i>    我的服务器</div>
-	<div class="mdui-card-primary-subtitle">总服务器: {var.servers.count}</div>
-	</div>
-	<div class="mdui-card-menu">
-	      <a href="/page/servers" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-text-color-white"><i class="mdui-icon material-icons">chevron_right</i></a>
-		  </div>
-	  <div class="mdui-card-content">
-	  <p>正运行中: {var.servers.running.count}</p>
-	  	<div class="mdui-progress">
-	  		<div class="mdui-progress-determinate mdui-color-light-green" style="width: calc({var.servers.running.count}*100%/{var.servers.count});"></div>
+{init:cores}
+		<div class="mdui-card" style="border-radius: 0 0 8px 8px;">
+			<div class="mdui-card-primary mdui-m-x-1 mdui-p-b-0">
+				<div class="mdui-card-primary-title">管理服务器</div>
+				<div class="mdui-card-primary-subtitle">以下是你可以管理的服务器</div>
+				<div class="kdui-server-input">
+					<button class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></button>
+					<input id="data-search" name="search" placeholder="搜索服务器">
 				</div>
-	  <p>将要过期: {var.servers.willexpire.count}</p>
-	  	<div class="mdui-progress">
-	  		<div class="mdui-progress-determinate mdui-color-amber" style="width: calc({var.servers.willexpire.count}*100%/{var.servers.count});"></div>
-				</div>
-	  <p>已经过期: {var.servers.expired.count}</p>
-	<div class="mdui-progress">
-		<div class="mdui-progress-determinate mdui-color-deep-orange" style="width: calc({var.servers.expired.count}*100%/{var.servers.count});"></div>
-	</div>
-	</div>
-  </div>
-
-<div class="mdui-card mdui-col-md-5 mdui-col-offset-md-2 mdui-col-sm-12 mdui-hoverable" style="height:314px;">
- <div class="mdui-card-primary">
-    <div class="mdui-card-primary-title"><i class="mdui-icon material-icons">notifications</i>    公告</div>
-	</div>
-	{if:var.user.type>="4"}
-		<div class="mdui-card-menu" mdui-tooltip="{content: '保存'}">
-	      <button id="easycraft-edit-announcement" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-text-color-white"><i class="mdui-icon material-icons">edit</i></button>
-		  </div>
-		  <div class="mdui-textfield">
-  <textarea class="mdui-textfield-input" id="easycraft-announcement" placeholder="请输入公告">{var.easycraft.announcement}</textarea>
-</div>
-		  {else}
-		  	 <div class="mdui-card-content">
-	 {var.easycraft.announcement}
 			</div>
-		  {endif}
-</div>
-</div>
+			<div class="mdui-divider"></div>
+			<ul class="mdui-list">
+				{foreach:var.servers}
+				<a href="/page/server/{var.for.server.id}" class="data-keyword-wrap" data-data-keyword="EasyCraft创建的服务器;chuangjiandefuwuqi" data-data-name="">
+					<li class="mdui-list-item mdui-ripple">
+						<i class="mdui-list-item-avatar mdui-icon material-icons {if:var.for.server.expired}mdui-color-red-800">priority_high{else}{if:var.for.server.running}mdui-color-green-800">play_arrow{else}mdui-color-yellow-800">pause{endif}{endif}</i>
+						<div class="mdui-list-item-content">
+							<div class="mdui-list-item-title mdui-list-item-one-line">{var.for.server.name}</div>
+							<div class="mdui-list-item-text mdui-list-item-one-line">{var.for.server.expiretime} 到期</div>
+						</div>
+					</li>
+				</a>				
+				{break}
+			</ul>
+		</div><!-- .mdui-card -->
+	</div><!-- .mdui-container -->
+	
+	<div class="mdui-dialog" style="width: 300px;" id="addNew">
+		<div class="mdui-dialog-title">新建服务器</div>
+		<form onsubmit="return false;" class="mdui-dialog-content" id="easycraft-server-add-form">
+			<div class="mdui-textfield">
+				<label class="mdui-textfield-label">服务器名</label>
+				<input name="name" class="mdui-textfield-input" type="text"/>
+			</div>
+
+			<div class="mdui-textfield">
+				<label class="mdui-textfield-label">服务器所有者</label>
+				<input name="owner" class="mdui-textfield-input" type="text" required />
+			</div>
+			<div class="mdui-row">
+				<div class="mdui-col-xs-4">
+					<div class="mdui-textfield">
+						<label class="mdui-textfield-label">玩家</label>
+						<input name="maxplayer" class="mdui-textfield-input" type="text" required />
+					</div>
+				</div>
+				<div class="mdui-col-xs-4">
+					<div class="mdui-textfield">
+						<label class="mdui-textfield-label">内存 (M)</label>
+						<input name="ram" class="mdui-textfield-input" type="text" required />
+					</div>
+				</div>
+				<div class="mdui-col-xs-4">
+					<div class="mdui-textfield">
+						<label class="mdui-textfield-label">端口</label>
+						<input name="port" class="mdui-textfield-input" type="text" required />
+					</div>
+				</div>
+			</div>
+
+			<div class="mdui-textfield">
+				<label class="mdui-textfield-label">到期时间</label>
+				<label class="mdui-checkbox mdui-float-right" style="margin-top: -30px;">
+					<input name="unlasting" type="checkbox"/>
+					<i class="mdui-checkbox-icon"></i>
+					不到期
+				</label>
+				<input class="mdui-textfield-input" name="expiretime" type="date"/>
+			</div>
+			
+			<div class="mdui-textfield" style="overflow: visible">
+				<label class="mdui-textfield-label">核心</label>
+				<select class="mdui-select" style="min-width: 100%; border-bottom: 1px solid rgba(255,255,255,.42);" mdui-select="{position: 'top'}" name="core">
+			{foreach:var.cores}
+			<option value="{var.for.core.id}">{var.for.core.name}</option>
+			{break}
+				</select>
+			</div>
+			
+				
+
+			<button id="easycraft-server-create" class="mdui-btn mdui-btn-block mdui-color-indigo-400 mdui-ripple mdui-btn-dense mdui-m-t-2">创建服务器</button>
+		</form>
+	</div>
+
+	<button class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink" mdui-dialog="{target: '#addNew'}"><i class="mdui-icon material-icons">add</i></button>	
+<script>
+var use_search=true;
+</script>
 {include:footer}

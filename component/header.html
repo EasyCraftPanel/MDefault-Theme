@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="zh-cmn-Hans">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
@@ -11,16 +10,16 @@
   <!-- MDUI CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/css/mdui.min.css"
     integrity="sha384-2PJ2u4NYg6jCNNpv3i1hK9AoAqODy6CdiC+gYiL2DVx+ku5wzJMFNdE3RoWfBIRP" crossorigin="anonymous" />
-  <link rel="stylesheet" href="/assets/style/easycraft.css" />
+  	<link href="/assets/style/kdui.css" rel="stylesheet">
   <title>{var.title} - EasyCraft</title>
 </head>
 
-<body class="mdui-appbar-with-toolbar mdui-drawer-body-left mdui-theme-layout-dark mdui-theme-primary-indigo mdui-theme-accent-light-green">
-  <header class="mdui-appbar mdui-appbar-fixed">
+<body class="mdui-theme-layout-dark mdui-theme-accent-light-green mdui-appbar-with-toolbar mdui-drawer-body-left">
+  <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar mdui-color-theme">
-    <span class="mdui-btn mdui-btn-icon"{if:var.user.login} mdui-drawer="{target: '#main-drawer', swipe: true}"{endif}><i
+    <span class="mdui-btn mdui-btn-icon"{if:var.user.login} mdui-drawer="{target: '#drawer', swipe: true}"{endif}><i
         class="mdui-icon material-icons">menu</i></span>
-    <span class="mdui-typo-headline mdui-hidden-xs">EasyCraft</span>
+    <a class="mdui-typo-headline mdui-hidden-xs">EasyCraft</a>
     <a class="mdui-typo-title">{var.title}</a>
     <div class="mdui-toolbar-spacer"></div>
     <button{if:!var.user.login} mdui-tooltip="{content: '登录'}" {endif} mdui-menu="{target: '#easycraft-selfuser-menu'}" class="mdui-btn mdui-btn-icon">
@@ -42,25 +41,33 @@
 	</ul>
 	</div>
 	
-  </header>
-  		 {if:var.user.login}
-  <div class="mdui-drawer" id="main-drawer">
-        <div class="mdui-list" mdui-collapse="{accordion: true}">
-
-          <a class="mdui-list-item mdui-ripple" href="/page/index">
-            <i class="mdui-list-item-icon mdui-icon material-icons">dashboard</i>
-            <div class="mdui-list-item-content">仪表盘</div>
-          </a>
-          <li class="mdui-divider"></li>
-          <a class="mdui-list-item mdui-ripple" href="/page/servers">
-            <i class="mdui-list-item-icon mdui-icon material-icons">storage</i>
-            <div class="mdui-list-item-content">服务器</div>
-          </a>          
-
-        </div>    
-        <div class="copyright mdui-typo">
-          <p>Powered by &copy; <a href="https://www.easycraft.top/">EasyCraft</a></p><p>Theme MDefult by Kengwang</p>
-        </div>    
   </div>
+  		 {if:var.user.login}
+  <div class="mdui-drawer" id="drawer">
+		<ul class="mdui-list">
+			<li class="mdui-list-item mdui-ripple">
+				<i class="mdui-list-item-icon mdui-icon material-icons">drafts</i>
+				<div class="mdui-list-item-content">Drafts</div>
+			</li>
+			
+			<li class="mdui-subheader">Subheader</li>
+
+			<li class="mdui-list-item mdui-ripple">
+				<i class="mdui-list-item-icon mdui-icon material-icons">error</i>
+				<div class="mdui-list-item-content">Spam</div>
+			</li>
+			
+			
+			
+			<li class="kdui-drawer-footer mdui-typo">
+				<div class="kdui-drawer-note mdui-typo mdui-card mdui-text-center">
+					<img class="mdui-m-a-1" src="/assets/img/note-icon.svg" height="90px">
+					<div class="mdui-typo-subheading">公告</div>
+					<div class="mdui-typo-caption" style="white-space: pre-line">文字文字文字文字文字文字文字文字文字文字文字文字文字</div>
+					<button class="mdui-btn mdui-ripple mdui-ripple-black mdui-btn-dense mdui-m-t-2 kdui-note-btn">某个链接</button>
+				</div>
+				Design by Kevin<br>Powered by © <a href="#" target="_blank">EasyCraft</a></li>
+		</ul>
+	</div>
             {endif}
   <div class="mdui-container">

@@ -1,50 +1,59 @@
 {init:server}
 {init:cores}
 {include:header var.title=var.server.name}
-<div class="mdui-card mdui-col-xs-12" style="padding-bottom: 50px;">
-  <div class="mdui-card-primary">
-    <div class="mdui-card-primary-title">{var.server.name}</div>
-	<div class="mdui-card-primary-subtitle{if:var.server.expired} mdui-text-color-red">已过期 到期时间: {var.server.expiretime}{else}">{endif}{if:var.server.running}运行中{else}已停止{endif}</div>
-  </div>
-	
-	{include:leftbar var.running=var.server.running,var.select="info"}
-	<form onsubmit="return false;" id="easycraft-server-info-form" class="mdui-col-md-8 mdui-col-offset-md-1 mdui-col-xs-12">
-		<div class="mdui-typo-display-3 easycraft-server-title">服务器信息</div>
-		<input type="hidden" name="sid" value="{var.server.id}">
-		<p class="mdui-col-md-2 mdui-col-xs-12">服务器名称</p>
-		<div class="mdui-col-md-10 mdui-textfield">
-			<input class="mdui-textfield-input" value="{var.server.name}" name="name" type="text" {if:var.user.type<="2"}disabled{endif}/>
-		</div>
-		<p class="mdui-col-md-2 mdui-col-xs-12">最大玩家数</p>
-		<div class="mdui-col-md-10 mdui-textfield">
-			<input class="mdui-textfield-input" value="{var.server.maxplayer}" name="maxplayer" type="text" {if:var.user.type<="2"}disabled{endif}/>
-		</div>
-		<p class="mdui-col-md-2 mdui-col-xs-12">端口</p>
-		<div class="mdui-col-md-10 mdui-textfield">
-			<input class="mdui-textfield-input" value="{var.server.port}" name="port" type="text" {if:var.user.type<="2"}disabled{endif}/>
-		</div>
-		<p class="mdui-col-md-2 mdui-col-xs-12">内存</p>
-		<div class="mdui-col-md-10 mdui-textfield">
-			<input class="mdui-textfield-input" value="{var.server.ram}" name="ram" type="text" {if:var.user.type<="2"}disabled{endif}/>
-		</div>
-		<p class="mdui-col-md-2 mdui-col-xs-12">到期时间</p>
-		<div class="mdui-col-md-10 mdui-textfield">
-			<input class="mdui-textfield-input" value="{var.server.expiretime}" name="expiretime" type="date" {if:var.user.type<="2"}disabled{endif}/>
-		</div>
-		<p class="mdui-col-md-2 mdui-col-xs-12">核心</p>
-		<select class="mdui-col-md-10 mdui-select" name="core" mdui-select>
-			{foreach:var.cores}
-			<option value="{var.for.core.id}"{if:var.for.core.id=var.server.core} selected = "selected"{endif}>{var.for.core.name}</option>
-			{break}
-		</select>
-		<br />
-		<button id="easycraft-server-info-save" class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple" style="margin-top: 30px;">保存</button>
-	</form>
-  </div>
-</div>
+		<div class="mdui-card" style="border-radius: 0 0 8px 8px;">
 
-<script>
-var run_status = {var.server.running};
-var server_id = {var.server.id};
-</script>
-{include:footer}
+			<div class="mdui-card-primary">
+				<div class="mdui-card-primary-title">EasyCraft Test Server</div>
+				<div class="mdui-card-primary-subtitle"><i class="mdui-icon material-icons mdui-typo-title" style="margin-top: -2px;">pause</i> 已停止</div>
+			</div>
+
+			<div class="mdui-divider"></div>
+	
+			{include:leftbar var.running=var.server.running,var.select="info"}
+			
+			<form class="mdui-col-md-9 mdui-col-xs-12 mdui-p-a-2"  id="easycraft-server-info-form" onsubmit="return false;">
+				<input type="hidden" name="sid" value="{var.server.id}">
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label mdui-text-color-white">服务器<strong>名称</strong></label>
+					<input class="mdui-textfield-input" type="text" value="{var.server.name}" {if:!var.user.can.editserver}disabled{endif}/>
+				</div>
+				
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label mdui-text-color-white">最大<strong>玩家</strong>数</label>
+					<input class="mdui-textfield-input" type="text" value="10" {if:!var.user.can.editserver}disabled{endif}/>
+				</div>
+				
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label mdui-text-color-white">服务器<strong>端口</strong></label>
+					<input class="mdui-textfield-input" type="text" value="19132" {if:!var.user.can.editserver}disabled{endif}/>
+				</div>
+				
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label mdui-text-color-white">服务器<strong>内存</strong></label>
+					<input class="mdui-textfield-input" type="text" value="1024" {if:!var.user.can.editserver}disabled{endif}/>
+				</div>
+				
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label mdui-text-color-white">到期的<strong>时间</strong></label>
+					<input class="mdui-textfield-input" type="text" value="2020-11-28" {if:!var.user.can.editserver}disabled{endif}/>
+				</div>
+				
+				<div class="mdui-textfield" style="overflow: visible;">
+					<label class="mdui-textfield-label mdui-text-color-white">服务器核心</label>
+					<select name="core" class="mdui-col-md-10 mdui-select" style="min-width: 100%" mdui-select="">
+						<option selected="selected" value="com.mojang.bedrock-1.14.32.1">[BDS] 1.14.32.1 官方基岩版 服务器</option>
+					</select>
+				</div>
+				
+				<button class="mdui-btn mdui-color-theme-accent mdui-ripple mdui-ripple-black mdui-m-y-1 mdui-float-right" id="easycraft-server-info-save"><i class="mdui-icon material-icons mdui-typo-title" style="margin-top: -2px;">save</i>保存</button>
+			</form>
+
+			
+		</div><!-- .mdui-card -->
+		<script>
+		var run_status = {var.server.running};
+		var server_id = {var.server.id};
+		</script>
+		{include:footer}
+
