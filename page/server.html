@@ -5,7 +5,7 @@
 
 			<div class="mdui-card-primary">
 				<div class="mdui-card-primary-title">EasyCraft Test Server</div>
-				<div class="mdui-card-primary-subtitle"><i class="mdui-icon material-icons mdui-typo-title" style="margin-top: -2px;">pause</i> 已停止</div>
+				<div class="mdui-card-primary-subtitle"><i class="mdui-icon material-icons mdui-typo-title" style="margin-top: -2px;">{if:var.server.running}play_arrow</i> 运行中{else}pause</i> 已停止{endif}</div>
 			</div>
 
 			<div class="mdui-divider"></div>
@@ -21,28 +21,30 @@
 				
 				<div class="mdui-textfield">
 					<label class="mdui-textfield-label mdui-text-color-white">最大<strong>玩家</strong>数</label>
-					<input class="mdui-textfield-input" type="text" value="10" {if:!var.user.can.editserver}disabled{endif}/>
+					<input class="mdui-textfield-input" type="text" value="{var.server.maxplayer}" {if:!var.user.can.editserver}disabled{endif}/>
 				</div>
 				
 				<div class="mdui-textfield">
 					<label class="mdui-textfield-label mdui-text-color-white">服务器<strong>端口</strong></label>
-					<input class="mdui-textfield-input" type="text" value="19132" {if:!var.user.can.editserver}disabled{endif}/>
+					<input class="mdui-textfield-input" type="text" value="{var.server.port}" {if:!var.user.can.editserver}disabled{endif}/>
 				</div>
 				
 				<div class="mdui-textfield">
 					<label class="mdui-textfield-label mdui-text-color-white">服务器<strong>内存</strong></label>
-					<input class="mdui-textfield-input" type="text" value="1024" {if:!var.user.can.editserver}disabled{endif}/>
+					<input class="mdui-textfield-input" type="text" value="{var.server.ram}" {if:!var.user.can.editserver}disabled{endif}/>
 				</div>
 				
 				<div class="mdui-textfield">
 					<label class="mdui-textfield-label mdui-text-color-white">到期的<strong>时间</strong></label>
-					<input class="mdui-textfield-input" type="text" value="2020-11-28" {if:!var.user.can.editserver}disabled{endif}/>
+					<input class="mdui-textfield-input" type="text" value="{var.server.expiretime}" {if:!var.user.can.editserver}disabled{endif}/>
 				</div>
 				
 				<div class="mdui-textfield" style="overflow: visible;">
 					<label class="mdui-textfield-label mdui-text-color-white">服务器核心</label>
 					<select name="core" class="mdui-col-md-10 mdui-select" style="min-width: 100%" mdui-select="">
-						<option selected="selected" value="com.mojang.bedrock-1.14.32.1">[BDS] 1.14.32.1 官方基岩版 服务器</option>
+					{foreach:var.cores}
+						<option selected="selected" value="{var.for.core.id}"{if:var.for.core.id=var.server.core} selected = "selected"{endif}>{var.for.core.name}</option>
+					{break}
 					</select>
 				</div>
 				
