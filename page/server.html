@@ -4,7 +4,7 @@
 		<div class="mdui-card" style="border-radius: 0 0 8px 8px;">
 
 			<div class="mdui-card-primary">
-				<div class="mdui-card-primary-title">EasyCraft Test Server</div>
+				<div class="mdui-card-primary-title">{var.server.name}</div>
 				<div class="mdui-card-primary-subtitle"><i class="mdui-icon material-icons mdui-typo-title" style="margin-top: -2px;">{if:var.server.running}play_arrow</i> 运行中{else}pause</i> 已停止{endif}</div>
 			</div>
 
@@ -36,7 +36,7 @@
 				
 				<div class="mdui-textfield">
 					<label class="mdui-textfield-label mdui-text-color-white">到期的<strong>时间</strong></label>
-					<input class="mdui-textfield-input" type="text" value="{var.server.expiretime}" {if:!var.user.can.editserver}disabled{endif}/>
+					<input class="mdui-textfield-input" type="date" value="{var.server.expiretime}" {if:!var.user.can.editserver}disabled{endif}/>
 				</div>
 				
 				<div class="mdui-textfield" style="overflow: visible;">
